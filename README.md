@@ -1,15 +1,12 @@
-This package creates a .zip file containing your package and its dependencies.
+This tool will create an archive of your package similar to `npm pack`, but will generate a zip file instead of a tarball.
 
-It is designed to help you deploy NPM packages to AWS Lambda.
+It is designed to help you deploy NPM packages to AWS Lambda or Azure Web Apps.
 
-The .zip file will contain
-- All files not in `node_modules`
-- All files in `node_modules` that are part of a package listed in the `dependencies` field of your `package.json`
-- Files may be excluded by adding glob patterns to `.packignore`
+This project uses the npm-packlist project to build up the list of files to include and all bundle dependencies. Check out their [documentation](https://www.npmjs.com/package/npm-packlist) on how to exclude files from the archive. 
 
 ## Installation
 
-`npm install --save-dev pack-zip`
+`npm install --save-dev npm-pack-zip`
 
 ## Example
 
@@ -17,7 +14,7 @@ _my-lambda_ is an npm package I want to run as an AWS Lambda Function.
 
 Install _pack-zip_ locally in _my-lambda_
 ```
-npm install --save-dev pack-zip
+npm install --save-dev npm-pack-zip
 ```
 
 Install any runtime dependencies of _my-lambda_.
@@ -28,12 +25,12 @@ npm install
 Modify _my-lambda/package.json_:
 ```
 "scripts": {
-    "build-aws-resource": "pack-zip"
+    "pack": "npm-pack-zip"
     ...
 }
 ```
 
 Create the .zip file containing _my-lambda_ and its dependencies, ready to upload to AWS Lambda
 ```
-npm run build-aws-resource
+npm run pack
 ```
