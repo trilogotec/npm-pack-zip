@@ -1,6 +1,6 @@
 'use strict';
 
-const archiver = require('archiver');
+const archiver = require('archiver-promise');
 const fs = require('fs-extra');
 const packlist = require('npm-packlist');
 const path = require('path');
@@ -19,21 +19,20 @@ function getDefaultOuputFilename({ cwd }) {
     return getPackageInfo(packageFile).then(packageInfo => `${packageInfo.name}.zip`);
 };
 
-function zipFiles(files, filename, destination, info, verbose) {
+function zipFiles(files, filename, source, destination, info, verbose) {
     const target = path.join(destination, filename);
     if (info)
         console.log(`Archive: ${target}`);
 
-    let archive = archiver.create('zip');
-    archive.on('error', error => { throw error; });
-    archive.pipe(fs.createWriteStream(target)).on('end', () => resolve());
+    let archive = archiver(target);
     files.forEach(file => {
+        const filePath = path.join(source, file);
         if (verbose)
             console.log(file);
-        archive.file(file, { name: file });
+        archive.file(filePath, { name: file });
     });
 
-    archive.finalize();
+    return archive.finalize();
 };
 
 function pack({ source, destination, info, verbose }) {
@@ -41,7 +40,7 @@ function pack({ source, destination, info, verbose }) {
         .then(files => {
             return getDefaultOuputFilename({ cwd: source })
                 .then(filename => {
-                    zipFiles(files, filename, destination, info, verbose);
+                    return zipFiles(files, filename, source, destination, info, verbose);
                 });
         });
 };

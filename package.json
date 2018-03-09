@@ -1,6 +1,6 @@
 {
   "name": "npm-pack-zip",
-  "version": "0.2.6",
+  "version": "1.2.6",
   "repository": {
     "type": "git",
     "url": "https://github.com/mwasplund/npm-pack-zip.git"
@@ -9,7 +9,7 @@
     "test": "node bin/npm-pack-zip.js"
   },
   "dependencies": {
-    "archiver": "^1.3.0",
+    "archiver-promise": "^1.0.0",
     "fs-extra": "^5.0.0",
     "mz": "^2.7.0",
     "npm-packlist": "^1.1.10",
