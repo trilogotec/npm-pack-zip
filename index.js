@@ -19,7 +19,7 @@ function getDefaultOuputFilename({ cwd }) {
     return getPackageInfo(packageFile).then(packageInfo => `${packageInfo.name}.zip`);
 };
 
-function zipFiles(files, filename, destination, verbose) {
+function zipFiles(files, filename, destination, info, verbose) {
     const target = path.join(destination, filename);
     if (info)
         console.log(`Archive: ${target}`);
@@ -41,7 +41,7 @@ function pack({ source, destination, info, verbose }) {
         .then(files => {
             return getDefaultOuputFilename({ cwd: source })
                 .then(filename => {
-                    zipFiles(files, filename, destination, verbose);
+                    zipFiles(files, filename, destination, info, verbose);
                 });
         });
 };

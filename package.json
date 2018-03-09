@@ -1,6 +1,6 @@
 {
   "name": "npm-pack-zip",
-  "version": "0.2.3",
+  "version": "1.2.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/mwasplund/npm-pack-zip.git"
