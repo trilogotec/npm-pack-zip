@@ -67,7 +67,7 @@ function zipFiles({ cwd, destination }) {
     });
 }
 
-function pack({ source, destination }) {
+function pack({ source, destination, info }) {
     let files = getGlobPatterns({ cwd: source })
         .then(getFiles({ cwd: source }));
 

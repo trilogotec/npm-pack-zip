@@ -5,18 +5,28 @@
 const console = require('console');
 const { pack } = require('../index');
 
-var args = process.argv.slice(2);
+const argv = require('yargs')
+    .usage('Usage: $0 --src [source] --dst [destination]')
+    .option('source', {
+        alias: 'src',
+        default: '',
+    })
+    .option('destination', {
+        alias: 'dst',
+        default: '',
+    })
+    .option('info', {
+        alias: 'i',
+        default: false,
+    })
+    .argv;
 
-if (args.length <= 2) {
-    let source = args.length >= 1 ? { source: args[0] } : {};
-    let destination = args.length >= 2 ? { destination: args[1] } : {};
-    pack(Object.assign(source, destination))
-        .then(() => process.exit(0))
-        .catch(error => {
-            console.error(error);
-            process.exit(1);
-        });
-} else {
-    console.log('USAGE: pack-zip [source] [destination]');
-    process.exit(1);
-}
+const source = argv.source;
+const destination = argv.destination;
+const info = argv.info;
+pack({ source, destination, info })
+    .then(() => process.exit(0))
+    .catch(error => {
+        console.error(error);
+        process.exit(1);
+    });
