@@ -1,12 +1,12 @@
 {
   "name": "npm-pack-zip",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "repository": {
     "type": "git",
     "url": "https://github.com/mwasplund/npm-pack-zip.git"
   },
   "scripts": {
-    "test": "node bin/pack-zip.js"
+    "test": "node bin/npm-pack-zip.js"
   },
   "dependencies": {
     "archiver": "^1.3.0",
@@ -20,7 +20,7 @@
     "email": "code.merlin.taylor@gmail.com"
   },
   "bin": {
-    "pack-zip": "bin/pack-zip.js"
+    "npm-pack-zip": "bin/npm-pack-zip.js"
   },
   "description": "Run npm pack to generate a .zip archive file",
   "eslintConfig": {
