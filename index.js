@@ -4,6 +4,7 @@ const archiver = require('archiver-promise');
 const fs = require('fs-extra');
 const packlist = require('npm-packlist');
 const path = require('path');
+const sanitize = require('sanitize-filename');
 
 function getPackageInfo(packageFile) {
     return fs.readFile(packageFile, 'utf-8')
@@ -16,7 +17,7 @@ function getPackageInfo(packageFile) {
 
 function getDefaultOuputFilename({ cwd }) {
     const packageFile = path.join(cwd, 'package.json');
-    return getPackageInfo(packageFile).then(packageInfo => `${packageInfo.name}.zip`);
+    return getPackageInfo(packageFile).then(packageInfo => `${sanitize(packageInfo.name)}.zip`);
 };
 
 function zipFiles(files, filename, source, destination, info, verbose) {

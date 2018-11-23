@@ -1,6 +1,6 @@
 {
   "name": "npm-pack-zip",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "repository": {
     "type": "git",
     "url": "https://github.com/mwasplund/npm-pack-zip.git"
@@ -13,6 +13,7 @@
     "fs-extra": "^5.0.0",
     "mz": "^2.7.0",
     "npm-packlist": "^1.1.10",
+    "sanitize-filename": "^1.6.1",
     "yargs": "^11.0.0"
   },
   "author": {
