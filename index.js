@@ -15,9 +15,9 @@ function getPackageInfo(packageFile) {
         });
 };
 
-function getDefaultOuputFilename({ cwd }) {
+function getDefaultOutputFilename({ cwd }) {
     const packageFile = path.join(cwd, 'package.json');
-    return getPackageInfo(packageFile).then(packageInfo => `${sanitize(packageInfo.name)}.zip`);
+    return getPackageInfo(packageFile).then(packageInfo => `${sanitize(packageInfo.name)}-${sanitize(packageInfo.version)}.zip`);
 };
 
 function zipFiles(files, filename, source, destination, info, verbose) {
@@ -39,7 +39,7 @@ function zipFiles(files, filename, source, destination, info, verbose) {
 function pack({ source, destination, info, verbose }) {
     return packlist({ path: source })
         .then(files => {
-            return getDefaultOuputFilename({ cwd: source })
+            return getDefaultOutputFilename({ cwd: source })
                 .then(filename => {
                     return zipFiles(files, filename, source, destination, info, verbose);
                 });
