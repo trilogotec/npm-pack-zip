@@ -15,6 +15,10 @@ const argv = require('yargs')
     alias: 'dst',
     default: '',
   })
+  .option('filename', {
+    alias: 'f',
+    default: '',
+  })
   .option('add-version', {
     alias: 'ver',
     default: false,
@@ -31,10 +35,11 @@ const argv = require('yargs')
 
 const source = argv.source;
 const destination = argv.destination;
+const filename = argv.filename;
 const info = argv.info;
 const verbose = argv.verbose;
 const addVersion = argv.addVersion;
-pack({source, destination, info, verbose, addVersion})
+pack({source, destination, info, verbose, addVersion, filename})
   .then(() => process.exit(0))
   .catch(error => {
     console.error(error);

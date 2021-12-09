@@ -36,14 +36,17 @@ function zipFiles(files, filename, source, destination, info, verbose) {
     return archive.finalize();
 };
 
-function pack({ source, destination, info, verbose, addVersion }) {
+function pack({ source, destination, info, verbose, addVersion, filename }) {
     return packlist({ path: source })
         .then(files => {
             return getDefaultOutputFilename({ cwd: source, addVersion })
-                .then(filename => {
+                .then(packageName => {
                     if (destination && !fs.existsSync(destination)){
                         fs.mkdirSync(destination);
                     }
+                    
+                    filename = filename || packageName
+                    
                     return zipFiles(files, filename, source, destination, info, verbose);
                 });
         });
